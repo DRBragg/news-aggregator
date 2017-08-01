@@ -1,14 +1,24 @@
 <h1>Submit an Article:</h1>
 
+<% if @error %>
+	<h2>Error! Please check your inputs</h2>
+<% elsif @dupError%>
+	<h2>That article already exists!</h2>
+<% elsif @errorURL %>
+	<h2>Please enter a valid URL!</h2>
+<% elsif @errorDesciptLen %>
+	<h2>Please enter a description length > 20 characters!</h2>
+<% end %>
+
 <form method="POST" action="/articles/new">
 	<label for='articleTitle'>Name of Article</label>
-    <input type='text' id='articleTitle' name='articleTitle' required>
+    <input type='text' id='articleTitle' name='articleTitle' value='<%= @title %>' required>
 
     <label for='articleURL'>URL of Article</label>  
-    <input type='text' id='articleURL' name='articleURL' required>
+    <input type='text' id='articleURL' name='articleURL' value='<%= @url %>' required>
 
     <label for='articleDescription'>Description</label>
-    <input type='text' id='articleDescription' name='articleDescription' required>
+    <input type='text' id='articleDescription' name='articleDescription' value='<%= @description %>' required>
     <input type='submit' value="Submit">
 </form>
 <br>

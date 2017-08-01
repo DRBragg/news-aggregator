@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'CSV'
+require 'uri'
+require 'pry'
 
 set :bind, '0.0.0.0'
 
@@ -20,10 +22,30 @@ post '/articles/new' do
   @url = params[:articleURL]
   @description = params[:articleDescription]
 
-  CSV.open('articles.csv', 'a') do |csv|
-    csv << ["#{@title}", "#{@url}", "#{@description}"]
+  csvArr = CSV.read('articles.csv')
+  csvArr.each do |row|
+    if row.include?(@url)
+      @dupError = true
+    end
   end
 
-  erb :new
-  redirect '/articles/new'
+  uri = URI.parse("#{@url}")
+
+  if uri.scheme != "http"
+    @errorURL = true
+    erb :new
+  elsif @description.length < 20
+    @errorDesciptLen = true
+    erb :new
+  elsif @dupError == true
+    erb :new
+  elsif @title != '' && @url != '' && @description != ''
+    CSV.open('articles.csv', 'a') do |csv|
+      csv << ["#{@title}", "#{@url}", "#{@description}"]
+    end
+    redirect '/articles'
+  else
+    @error = true
+    erb :new
+  end
 end
