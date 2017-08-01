@@ -31,7 +31,7 @@ post '/articles/new' do
 
   uri = URI.parse("#{@url}")
 
-  if uri.scheme != "http"
+  if uri.scheme != "http" && uri.scheme != "https"
     @errorURL = true
     erb :new
   elsif @description.length < 20
