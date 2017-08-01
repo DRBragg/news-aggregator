@@ -1,0 +1,15 @@
+<h1>Submit an Article:</h1>
+
+<form method="POST" action="/articles/new">
+	<label for='articleTitle'>Name of Article</label>
+    <input type='text' id='articleTitle' name='articleTitle' required>
+
+    <label for='articleURL'>URL of Article</label>  
+    <input type='text' id='articleURL' name='articleURL' required>
+
+    <label for='articleDescription'>Description</label>
+    <input type='text' id='articleDescription' name='articleDescription' required>
+    <input type='submit' value="Submit">
+</form>
+<br>
+<a href="/articles">View list of articles</a>

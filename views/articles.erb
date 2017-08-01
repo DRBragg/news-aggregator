@@ -1,0 +1,10 @@
+<h1>Articles:</h1>
+
+<ul>
+    <% CSV.foreach('articles.csv', skip_blanks:true) do |row| %>
+   		<li><%=row[0]%> (<a href='<%=row[1]%>' target='_blank'>Link to <%=row[0]%></a>)
+        <p>Description: <%=row[2]%></p></li>
+    <%end%>
+</ul>
+<br>
+<a href="articles/new">Submit an article</a>
