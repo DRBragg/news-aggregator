@@ -29,7 +29,7 @@ post '/articles/new' do
     end
   end
 
-  uri = URI.parse("#{@url}")
+  uri = URI.parse(@url)
 
   if uri.scheme != "http" && uri.scheme != "https"
     @errorURL = true
