@@ -1,9 +1,9 @@
 <h1>Articles:</h1>
 
 <ul>
-    <% CSV.foreach('articles.csv', skip_blanks:true, headers:true) do |row| %>
-   		<li><a href='<%=row[1]%>' target='_blank'><%=row[0]%></a>
-        <p>Description: <%=row[2]%></p></li>
+    <% @csv.each do |row| %>
+   		<li><a href="<%=row["url"]%>" target='_blank'><%=row["title"]%></a>
+        <p>Description: <%=row["description"]%></p></li>
     <%end%>
 </ul>
 <br>

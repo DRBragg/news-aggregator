@@ -5,6 +5,10 @@ require 'pry'
 
 set :bind, '0.0.0.0'
 
+before do
+  @csv = CSV.read('articles.csv', skip_blanks:true, headers:true)
+end
+
 get '/' do
   redirect '/articles'
 end
